@@ -1,19 +1,21 @@
 {
-  "name": "pkg-name",
+  "name": "prosemirror-math",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "packageManager": "pnpm@10.30.1",
-  "description": "TypeScript starter kit",
+  "description": "Math extensions for ProseMirror",
   "author": "ocavue <ocavue@gmail.com>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/ocavue",
-  "homepage": "https://github.com/ocavue/pkg-name#readme",
+  "homepage": "https://github.com/ocavue/prosemirror-math#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ocavue/pkg-name.git"
+    "url": "https://github.com/ocavue/prosemirror-math.git"
   },
-  "bugs": "https://github.com/ocavue/pkg-name/issues",
-  "keywords": [],
+  "bugs": "https://github.com/ocavue/prosemirror-math/issues",
+  "keywords": [
+    "ProseMirror"
+  ],
   "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -41,18 +43,36 @@
     "dev": "tsdown --watch",
     "lint": "eslint .",
     "fix": "eslint --fix . && prettier --write .",
+    "test:install": "playwright install chromium",
     "test": "vitest",
     "typecheck": "tsc -b"
   },
+  "dependencies": {
+    "@ocavue/utils": "^1.5.0",
+    "prosemirror-enter-rules": "^0.1.5",
+    "prosemirror-inputrules": "^1.0.0",
+    "prosemirror-model": "^1.0.0",
+    "prosemirror-state": "^1.0.0",
+    "prosemirror-view": "^1.0.0"
+  },
   "devDependencies": {
+    "@mathjax/src": "^4.1.0",
     "@ocavue/eslint-config": "^4.1.0",
     "@ocavue/tsconfig": "^0.6.3",
+    "@prosekit/core": "^0.10.0",
     "@types/node": "^20.19.10",
+    "@vitest/browser": "^4.0.18",
+    "@vitest/browser-playwright": "^4.0.18",
+    "diffable-html-snapshot": "^0.2.0",
     "eslint": "^10.0.1",
+    "katex": "^0.16.28",
+    "playwright": "^1.58.2",
     "prettier": "^3.8.1",
+    "temml": "^0.13.1",
     "tsdown": "^0.20.3",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "vitest-browser-commands": "^0.2.0"
   }
 }
