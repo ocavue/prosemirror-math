@@ -1,7 +1,7 @@
 {
   "name": "prosemirror-math",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "packageManager": "pnpm@10.30.1",
   "description": "Rendering math expressions in ProseMirror",
   "author": "ocavue <ocavue@gmail.com>",
