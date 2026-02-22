@@ -1,9 +1,9 @@
 {
   "name": "prosemirror-math",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "packageManager": "pnpm@10.30.1",
-  "description": "Math extensions for ProseMirror",
+  "description": "Rendering math expressions in ProseMirror",
   "author": "ocavue <ocavue@gmail.com>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/ocavue",

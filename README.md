@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/prosemirror-math?color=a1b858&label=)](https://www.npmjs.com/package/prosemirror-math)
 
-Math editing extensions for [ProseMirror](https://prosemirror.net/). Provides node specs, node views, input rules, and plugins for inline and block math.
+Rendering math expressions in [ProseMirror](https://prosemirror.net/).
 
 ## Installation
 
