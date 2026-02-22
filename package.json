@@ -43,6 +43,7 @@
     "dev": "tsdown --watch",
     "lint": "eslint .",
     "fix": "eslint --fix . && prettier --write .",
+    "test:install": "playwright install chromium",
     "test": "vitest",
     "typecheck": "tsc -b"
   },
