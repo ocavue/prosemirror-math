@@ -122,4 +122,16 @@ describe('defineMathInlineInputRule', () => {
       n.doc(n.codeBlock('$x^2$')).toJSON(),
     )
   })
+
+  it('should not trigger when the opening $ is 500 characters before the caret', async () => {
+    // Input rules only see the last 500 characters before the caret, so the
+    // lookbehind before the opening `$` tests the start of that window.
+    const text = '$$' + 'b'.repeat(499)
+    editor.set(n.doc(n.p(`${text}<a>`)))
+
+    await userEvent.keyboard('$')
+    expect(editor.view.state.doc.toJSON()).toEqual(
+      n.doc(n.p(`${text}$`)).toJSON(),
+    )
+  })
 })

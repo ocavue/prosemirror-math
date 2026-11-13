@@ -30,6 +30,15 @@ export function createMathInlineInputRule(nodeType: string): InputRule {
   return new InputRule(
     new RegExp(MATH_INPUT_REGEXP),
     (state, match, start, end) => {
+      // `prosemirror-inputrules` only matches against the last 500 characters
+      // before the cursor. In a longer text block, for a match at the first of
+      // those characters, the lookbehind tests that cut instead of the real
+      // text before the match.
+      // https://code.haverbeke.berlin/prosemirror/prosemirror-inputrules/src/tag/1.5.1/src/inputrules.ts#L115-L116
+      if (match.index === 0 && state.doc.resolve(start).parentOffset > 0) {
+        return null
+      }
+
       const { tr, schema } = state
       const mathText = match[2]
       if (!mathText) return null
