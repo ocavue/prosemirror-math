@@ -11,8 +11,13 @@ export const MATH_INPUT_REGEXP: string =
   '(\\$\\$?)' +
   // capture group 2: the math content
   // - a single non-whitespace, non-`$` character
-  // - optionally followed by any non-`$` characters and a final non-whitespace, non-`$` character
-  '([^\\s$](?:[^$]*[^\\s$])?)' +
+  // - optionally followed by at most 400 non-`$` characters and a final non-whitespace, non-`$` character
+  //
+  // The 400 limit keeps the whole match shorter than the 500 characters that
+  // `prosemirror-inputrules` matches against, so the lookbehind always tests
+  // the real text before the match.
+  // https://code.haverbeke.berlin/prosemirror/prosemirror-inputrules/src/tag/1.5.1/src/inputrules.ts#L75
+  '([^\\s$](?:[^$]{0,400}[^\\s$])?)' +
   // backreference: closing delimiter must match the opening
   '\\1' +
   // end of input (required by ProseMirror InputRule)
@@ -30,15 +35,6 @@ export function createMathInlineInputRule(nodeType: string): InputRule {
   return new InputRule(
     new RegExp(MATH_INPUT_REGEXP),
     (state, match, start, end) => {
-      // `prosemirror-inputrules` only matches against the last 500 characters
-      // before the cursor. In a longer text block, for a match at the first of
-      // those characters, the lookbehind tests that cut instead of the real
-      // text before the match.
-      // https://code.haverbeke.berlin/prosemirror/prosemirror-inputrules/src/tag/1.5.1/src/inputrules.ts#L115-L116
-      if (match.index === 0 && state.doc.resolve(start).parentOffset > 0) {
-        return null
-      }
-
       const { tr, schema } = state
       const mathText = match[2]
       if (!mathText) return null
