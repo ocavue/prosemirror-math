@@ -11,8 +11,13 @@ export const MATH_INPUT_REGEXP: string =
   '(\\$\\$?)' +
   // capture group 2: the math content
   // - a single non-whitespace, non-`$` character
-  // - optionally followed by any non-`$` characters and a final non-whitespace, non-`$` character
-  '([^\\s$](?:[^$]*[^\\s$])?)' +
+  // - optionally followed by at most 490 non-`$` characters and a final non-whitespace, non-`$` character
+  //
+  // The 490 limit keeps the whole match shorter than the 500 characters that
+  // `prosemirror-inputrules` matches against, so the lookbehind always tests
+  // the real text before the match.
+  // https://code.haverbeke.berlin/prosemirror/prosemirror-inputrules/src/tag/1.5.1/src/inputrules.ts#L75
+  '([^\\s$](?:[^$]{0,490}[^\\s$])?)' +
   // backreference: closing delimiter must match the opening
   '\\1' +
   // end of input (required by ProseMirror InputRule)
